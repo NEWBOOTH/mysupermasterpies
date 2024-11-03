@@ -1,0 +1,31 @@
+<%-include ('partials/header') -%>
+    <div class="container">
+        <h1>Search Results</h1>
+<form action="/" method="post">
+  <input type="search" name="s" class="btn"><button class="btn">search</button>
+</form>
+        <div class="row">
+            <% movies.forEach(movie => { %>
+                <div class="col-md-2 mb-2">
+                    <div class="card">
+                        <img src="https://image.tmdb.org/t/p/w200<%= movie.poster_path %>" class="card-img-top" alt="<%= movie.title %> Poster">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= movie.title %></h5>
+                            <a href="movie/<%= movie.id %>" class="btn btn-primary">
+                                DEtails
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+
+        <% if (currentPage > 1) { %>
+            <a href="/?page=<%= currentPage - 1 %>" class="btn btn-secondary">Previous Page</a>
+        <% } %>
+        <% if (movies.length === 20) { %> 
+            <a href="/?page=<%= currentPage + 1 %>" class="btn btn-secondary">Next Page</a>
+        <% } %>
+    </div>
+</body>
+</html>

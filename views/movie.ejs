@@ -1,0 +1,36 @@
+<%-include ('partials/header') -%>
+
+<div class="container">
+    <div class="row">
+        <div class="">
+            <img src="https://image.tmdb.org/t/p/w300<%= movie.poster_path %>" alt="<%= movie.title %> Poster" class="img-fluid">
+            <p class="form-control" ><%= movie.overview %></p>
+        </div>
+
+        <div class="">
+            <h1><%= movie.title %></h1>
+            
+            <p >Release Date: <%= movie.release_date %></p>
+            <h4>Cast</h4>
+            <ul class="list-group">
+
+                <% movie.credits.cast.slice(0, 10).forEach(actor => { %>
+                    <li class="list-group-item">
+                        <% if (actor.profile_path) { %>
+                            <img src="https://image.tmdb.org/t/p/w200<%= actor.profile_path %>" alt="<%= actor.name %> Profile" class="rounded-circle mr-2" style="width: 40px; height: 40px;">
+                        <% } %>
+                        <a href="https://www.google.com/search?q=<%= actor.name %>" target="_blank"><%= actor.name %></a>
+                    </li>
+                <% }); %>
+            </ul>
+            <% if (movie.videos.results.length > 0) { %>
+            <h4>Trailer</h4>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= movie.videos.results[0].key %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <% } %>
+            <h4>DOWNLOADS</h4>
+            <a href="/download/<%= movie.id %>" class="btn btn-primary">DOWNLOAD</a>
+        </div>
+    </div>
+</div>
+<%-include ('partials/footer') -%>
+
